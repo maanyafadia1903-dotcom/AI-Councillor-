@@ -44,3 +44,19 @@ The system combines:
 ---
 
 ## 📂 Project Structure
+Career-Guide/
+│
+├── career_guider.cpp
+├── career-guider.html
+└── README.md
+
+
+---
+
+## ⚙️ How to Run the Project
+
+### Compile the C++ Program
+
+```bash
+g++ career_guider.cpp -o career
+./career
