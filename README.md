@@ -1,74 +1,127 @@
-# Career Guider: Adaptive Career Guidance System
+# Career Guidance System
 
-A multi-platform personalized career counseling suite designed to help students navigate critical academic transitions and transform personal interests into professional roadmaps[cite: 6, 7]. The project features a robust **C++ backend** utilizing advanced Object-Oriented Programming (OOP) and a modern **web-based frontend** powered by Claude AI for deep analysis[cite: 6, 7].
+A terminal-based career counselling application built in C++ that guides students through personalized, adaptive quizzes to recommend streams, degrees, and career paths based on their interests and goals.
 
----
+## Overview
 
-## 🌟 Key Features
+This project demonstrates core Object-Oriented Programming concepts in C++ through a practical, real-world application. Students at different stages — after 10th, after 12th, or anyone exploring their passions — receive tailored career recommendations via branching quiz logic.
 
-### 1. Adaptive Questioning Engine
-*   **Dynamic Pathfinding**: Questions evolve based on previous answers. For example, selecting a "Science" interest in the 10th-grade quiz triggers specific inquiries about Math comfort and lab preferences[cite: 6, 7].
-*   **Weighted Scoring**: Uses custom operator overloading in C++ to compute stream recommendations (PCM, PCB, Commerce, Arts) based on cumulative interest scores[cite: 7].
+## Features
 
-### 2. Specialized Guidance Modes
-*   **10th Grade Stream Selection**: Analyzes primary interests and technical comfort to recommend the ideal 11th-grade stream[cite: 6, 7].
-*   **Post-12th Career Navigator**: Provides detailed industry roadmaps for Engineering, Medicine, IT, Business, and Creative fields, including entry-level salary expectations in India[cite: 6, 7].
-*   **Passion-to-Profession (Hobby) Roadmap**: Converts hobbies like Coding, Gaming, or Photography into actionable 5-year career timelines with specific monetization strategies[cite: 6, 7].
+- Adaptive/branching quiz — answers determine the next question, not a fixed linear flow
+- Three distinct quiz modes for different user situations
+- Personalized career roadmaps with salary ranges, timelines, and top companies
+- Hobby-to-career conversion with monetization strategies and learning plans
+- 10 hobby categories and 4 stream categories with detailed career data
+- Activity logging via `journal.log`
 
-### 3. AI-Powered Personalization
-*   **Claude AI Integration**: (Frontend) Generates real-time, deep-analysis reports including identified strengths, unique market advantages, and "Watch Out" pitfalls tailored to the user's quiz profile[cite: 6].
-*   **Success Formulas**: Generates personalized daily routines and success equations based on the user's available daily hours and ultimate career goals[cite: 6, 7].
+## OOP Concepts Demonstrated
 
----
+| Concept | Where Used |
+|---|---|
+| Abstract base class with pure virtual functions | `Quiz` class |
+| Single Inheritance | `AgeBasedQuiz` from `Quiz` |
+| Multilevel Inheritance | `QuizFor10th` and `QuizFor12th` from `AgeBasedQuiz` |
+| Hierarchical Inheritance | `InterestBasedQuiz` from `Quiz` |
+| Multiple Inheritance | `HobbyQuiz` from `InterestBasedQuiz` and `QuizFormatter` |
+| Operator Overloading | `QuizScore` (`+`, `+=`, `>`, `==`) |
+| Polymorphism (runtime) | Base class pointer `Quiz*` calls overridden `conductQuiz()` |
+| Encapsulation | Private members with public getters across all classes |
+| Structs for data modeling | `Career`, `Hobby` |
+| STL containers | `map`, `vector` for career and hobby databases |
 
-## 🛠️ Technical Architecture
+## Project Structure
 
-### C++ Backend Implementation
-The backend leverages a sophisticated class hierarchy to manage complex quiz logic[cite: 7]:
-*   **Polymorphism**: Uses virtual functions and base class pointers (`Quiz*`) to execute different quiz types at runtime[cite: 7].
-*   **Inheritance Models**:
-    *   **Multilevel**: `Quiz` → `AgeBasedQuiz` → `QuizFor10th`[cite: 7].
-    *   **Multiple**: `HobbyQuiz` inherits from both `InterestBasedQuiz` and `QuizFormatter` (Mixin)[cite: 7].
-    *   **Hierarchical**: Multiple specialized quizzes branching from a single `InterestBasedQuiz` base[cite: 7].
-
-### Web Frontend Implementation
-*   **Responsive UI**: Built with a "Mobile-First" approach using CSS glassmorphism, adaptive orbs, and fluid animations[cite: 6].
-*   **State Management**: Tracks user history to allow "Back" navigation through dynamically injected adaptive question flows[cite: 6].
-
----
-
-## 📂 Project Structure
-
-```text
-├── career_guider.cpp      # C++ Source: OOP-driven quiz engine and database
-├── index.html             # Web UI: Interactive adaptive quiz interface
-└── performance_assets/    # Visual assets and design tokens
+```
+CareerGuidanceSystem/
+├── main.cpp          # All classes, logic, and entry point
+└── README.md
 ```
 
----
+## Quiz Modes
 
-## 🚀 Getting Started
+**Mode 1 — Stream Selection (After 10th)**
+Recommends one of four streams based on adaptive questions:
+- PCM — Engineering, Technology, Science
+- PCB — Medical, Healthcare, Life Sciences
+- Commerce — Business, Finance, Accounting
+- Humanities/Arts — Law, Journalism, Civil Services
 
-### Running the C++ Application
-1.  Compile the source code:
-    ```bash
-    g++ career_guider.cpp -o CareerGuider
-    ```
-2.  Launch the terminal-based interactive system:
-    ```bash
-    ./CareerGuider
-    ```
+**Mode 2 — Career Selection (After 12th)**
+Recommends a career path based on interest and goals:
+- Software Engineer / Data Scientist
+- Civil / Mechanical / Electrical Engineer
+- Medical Doctor (MBBS/MD)
+- Entrepreneur / Business Manager
+- Creative Professional
 
-### Using the Web Interface
-1.  Open `index.html` in any modern web browser[cite: 6].
-2.  Select your current academic status to begin the adaptive session[cite: 6].
-3.  (Optional) Connect to the internet to enable the **Claude AI Deep Analysis** feature[cite: 6].
+**Mode 3 — Passion to Profession (Interest-Based)**
+Selects from 10 hobby categories and provides a fully personalized profile including skill level, daily schedule, milestones, monetization strategies, and learning resources.
 
----
+Available hobbies: Programming, Writing, Photography, Music Production, Drawing, Game Design, Science/Research, Entrepreneurship, Teaching, Data Analysis.
 
-## 📊 Sample Output: Passion Roadmap
-For a student interested in **Programming**, the system provides[cite: 6, 7]:
-*   **Top Careers**: Software Engineer, Data Scientist, Cybersecurity Specialist[cite: 6, 7].
-*   **Daily Routine**: 30m concept learning, 1h+ hands-on practice, 30m review[cite: 6, 7].
-*   **Success Formula**: Consistency + Quality Learning + Clear Goal = Dream Career[cite: 6, 7].
+## How to Compile and Run
+
+**Requirements:** Any C++11 or later compiler (g++, MSVC, clang++)
+
+**Using g++ (Linux / Mac / Windows with MinGW):**
+```bash
+g++ -std=c++11 -o career_guidance main.cpp
+./career_guidance
 ```
+
+**Using MSVC (Windows):**
+```bash
+cl /EHsc main.cpp
+career_guidance.exe
+```
+
+**Using an IDE:** Open `main.cpp` in Code::Blocks, Dev-C++, or Visual Studio and build/run directly.
+
+## Sample Interaction
+
+```
+╔════════════════════════════════════════════════╗
+║    PERSONALIZED CAREER GUIDANCE SYSTEM         ║
+║        Your Future, Your Questions!            ║
+╚════════════════════════════════════════════════╝
+
+Choose your situation:
+
+1. I'm in 10th class - Help choose stream
+2. I'm after 12th class - Help choose career
+3. Help explore my interests & passions
+4. Exit
+
+Enter choice (1/2/3/4): 1
+
+Q1. What excites you the most?
+   a) Technology, Engineering, Building solutions
+   b) Healthcare, Medicine, Helping patients
+   ...
+```
+
+## Inheritance Hierarchy
+
+```
+Quiz  (Abstract Base)
+│
+├── AgeBasedQuiz  (Single Inheritance)
+│   ├── QuizFor10th  (Multilevel Inheritance)
+│   └── QuizFor12th  (Multilevel Inheritance)
+│
+└── InterestBasedQuiz  (Hierarchical Inheritance)
+    └── HobbyQuiz  (Multiple Inheritance — also inherits QuizFormatter)
+
+QuizFormatter  (Mixin)
+└── HobbyQuiz
+```
+
+## Notes
+
+- `system("pause")` and `system("cls")` are Windows-specific. On Linux/Mac, replace with `cin.get()` and `system("clear")` respectively.
+- The project is intentionally single-file for ease of submission and review. In production, each class would be split into its own `.h` and `.cpp` files.
+
+## Authors
+
+Built as a college project to demonstrate C++ OOP principles through a practical career counselling application.
